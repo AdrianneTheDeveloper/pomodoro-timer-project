@@ -49,9 +49,7 @@ function Pomodoro() {
 
           setToBreak((prevState) => !prevState);
 
-          setElapsedTime((prevState) => {
-            return (prevState = 0);
-          });
+          
           toFocus === true
             ? setTimeRemaining(breakDuration)
             : setTimeRemaining(focusDuration * 60);
@@ -66,7 +64,11 @@ function Pomodoro() {
           return (prevState += 100 / breakDuration);
         });
       }
-     
+      if (elapsedTime <= 99) {
+        setElapsedTime((prevState) => {
+          return (prevState = 0);
+        });
+     }
     },
     isTimerRunning ? 1000 : null
   );
