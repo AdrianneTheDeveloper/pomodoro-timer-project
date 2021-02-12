@@ -64,10 +64,10 @@ function Pomodoro() {
           return (prevState += 100 / breakDuration);
         });
       }
-      if (elapsedTime <= 99) {
-        setElapsedTime((prevState) => {
-          return (prevState = 0);
-        });
+     if (elapsedTime >= 99) {
+       setElapsedTime((prevState) => {
+            return (prevState = 0);
+          });
      }
     },
     isTimerRunning ? 1000 : null
