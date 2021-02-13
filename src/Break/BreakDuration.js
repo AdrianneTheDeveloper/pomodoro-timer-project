@@ -1,21 +1,10 @@
 import React from "react";
 import { secondsToDuration } from "../utils/duration";
 
-function BreakDurationChange({isTimerRunning, breakDuration, setBreakDuration, pause}) {
+function BreakDurationChange({isTimerRunning, breakIncrease, breakDecrease, pause, breakDuration}) {
   // Break duration starts out at 1:00
   
-  // On click increase break duration by one minute
-  const handleClickBreakIncrease = ({ target }) => {
-    setBreakDuration((prevDuration) => {
-      return (prevDuration += 60);
-    });
-  };
-  // On click decrease break duration by one minute
-  const handleClickBreakDecrease = ({ target }) => {
-    setBreakDuration((prevDuration) => {
-      return (prevDuration -= 60);
-    });
-  };
+
   return (
     <div className="col">
       <div className="float-right">
@@ -32,7 +21,7 @@ function BreakDurationChange({isTimerRunning, breakDuration, setBreakDuration, p
                 type="button"
                 className="btn btn-secondary"
                 data-testid="decrease-break"
-                onClick={handleClickBreakDecrease}
+                onClick={breakDecrease}
               >
                 <span className="oi oi-minus" />
               </button>
@@ -42,7 +31,7 @@ function BreakDurationChange({isTimerRunning, breakDuration, setBreakDuration, p
                 type="button"
                 className="btn btn-secondary"
                 data-testid="decrease-break"
-                onClick={handleClickBreakDecrease}
+                onClick={breakDecrease}
               >
                 <span className="oi oi-minus" />
               </button>
@@ -53,7 +42,7 @@ function BreakDurationChange({isTimerRunning, breakDuration, setBreakDuration, p
                 type="button"
                 className="btn btn-secondary"
                 data-testid="increase-break"
-                onClick={handleClickBreakIncrease}
+                onClick={breakIncrease}
               >
                 <span className="oi oi-plus" />
               </button>
@@ -63,7 +52,7 @@ function BreakDurationChange({isTimerRunning, breakDuration, setBreakDuration, p
                 type="button"
                 className="btn btn-secondary"
                 data-testid="increase-break"
-                onClick={handleClickBreakIncrease}
+                onClick={breakIncrease}
               >
                 <span className="oi oi-plus" />
               </button>

@@ -24,8 +24,32 @@ function Pomodoro() {
   // stop starts off as false
   const [stop, setStop] = useState(false);
   // Assign timeRemaining to its own variable
-  
+    // On click increase break duration by one minute
+    const handleClickBreakIncrease = () => {
+      setBreakDuration((prevDuration) => {
+        return (prevDuration += 60);
+      });
+    };
+    // On click decrease break duration by one minute
+    const handleClickBreakDecrease = () => {
+      setBreakDuration((prevDuration) => {
+        return (prevDuration -= 60);
+      });
+  };
+  const handleFocusClickIncrease = ({ target }) => {
+    setDuration((prevDuration) => {
+      return (prevDuration += 5);
+    });
+  };
+// Decrease duration by 5 with every click
+  const handleFocusClickDecrease = ({ target }) => {
+    setDuration((prevDuration) => {
+      return (prevDuration -= 5);
+    });
+  };
   let currentTime = timeRemaining;
+  let timeElapsed = elapsedTime;
+  console.log(elapsedTime)
   useInterval(
     () => {
       let timeElapsed = 1;
@@ -49,7 +73,7 @@ function Pomodoro() {
 
           setToBreak((prevState) => !prevState);
 
-          
+         
           toFocus === true
             ? setTimeRemaining(breakDuration)
             : setTimeRemaining(focusDuration * 60);
@@ -64,7 +88,8 @@ function Pomodoro() {
           return (prevState += 100 / breakDuration);
         });
       }
-     if (elapsedTime >= 99) {
+      
+     if (elapsedTime >= 100) {
        setElapsedTime((prevState) => {
             return (prevState = 0);
           });
@@ -102,9 +127,19 @@ function Pomodoro() {
       setIsTimerRunning(false);
       // set time remaining to current time
       setTimeRemaining(currentTime);
+      setElapsedTime(timeElapsed)
     }
     if (pause === true) {
       setPause(false);
+      if (toFocus === true) {
+        setElapsedTime((prevState) => {
+          return (prevState += 100 / (focusDuration * 60));
+        });
+      } else if (toBreak === true) {
+        setElapsedTime((prevState) => {
+          return (prevState += 100 / breakDuration);
+        });
+      }
     }
   }
   function stopTimer() {
@@ -125,12 +160,16 @@ function Pomodoro() {
           focusDuration={focusDuration}
           setDuration={setDuration}
           pause={pause}
+          focusIncrease={handleFocusClickIncrease}
+          focusDecrease={handleFocusClickDecrease}
         />
         <BreakDurationChange
           isTimerRunning={isTimerRunning}
           breakDuration={breakDuration}
           setBreakDuration={setBreakDuration}
           pause={pause}
+          breakIncrease={handleClickBreakIncrease}
+          breakDecrease={handleClickBreakDecrease}
         />
       </div>
       <div className="row">
