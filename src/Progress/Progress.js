@@ -12,7 +12,6 @@ function Progress({
   elapsedTime,
   pause,
   stop,
-  progress
 }) {
 
   if (toFocus === true && isTimerRunning) {
