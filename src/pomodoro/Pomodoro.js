@@ -49,7 +49,7 @@ function Pomodoro() {
   };
   let currentTime = timeRemaining;
   let timeElapsed = elapsedTime;
-  console.log(elapsedTime)
+ 
   useInterval(
     () => {
       let timeElapsed = 1;
